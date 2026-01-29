@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <title>Private Chat</title>
@@ -15,8 +15,20 @@
       margin: 0;
       height: 100vh;
       background:
-        radial-gradient(1200px 400px at 10% 50%, rgba(120, 90, 255, 0.35), transparent 60%),
-        radial-gradient(1000px 300px at 80% 40%, rgba(180, 90, 255, 0.25), transparent 60%),
+        repeating-linear-gradient(
+          -15deg,
+          rgba(120, 90, 255, 0.18) 0px,
+          rgba(120, 90, 255, 0.18) 2px,
+          transparent 40px,
+          transparent 80px
+        ),
+        repeating-linear-gradient(
+          15deg,
+          rgba(180, 100, 255, 0.14) 0px,
+          rgba(180, 100, 255, 0.14) 2px,
+          transparent 50px,
+          transparent 90px
+        ),
         linear-gradient(180deg, #05060d, #0a0b18 60%, #05060d);
       display: flex;
       align-items: center;
@@ -25,27 +37,28 @@
     }
 
     .login-card {
-      width: 320px;
-      padding: 28px;
-      border-radius: 14px;
-      background: rgba(15, 18, 40, 0.92);
+      width: 340px;
+      padding: 30px;
+      border-radius: 16px;
+      background: rgba(12, 14, 32, 0.94);
       border: 1px solid transparent;
       border-image: linear-gradient(135deg, #4b6cff, #9a6bff) 1;
+      backdrop-filter: blur(2px);
     }
 
     .login-card h1 {
-      margin: 0 0 22px;
+      margin: 0 0 24px;
       font-size: 22px;
       text-align: center;
       font-weight: 500;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.4px;
     }
 
     .login-card input {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       margin-bottom: 14px;
-      border-radius: 8px;
+      border-radius: 9px;
       border: 1px solid #2d3366;
       background: #0f1228;
       color: #fff;
@@ -59,8 +72,8 @@
 
     .login-card button {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
+      padding: 13px;
+      border-radius: 9px;
       border: none;
       background: linear-gradient(135deg, #4b6cff, #9a6bff);
       color: #fff;
@@ -72,13 +85,12 @@
 
 <body>
   <div class="login-card">
-    <h1>Private Chat</h1>
+    <h1>Приватный чат</h1>
 
-    <input type="text" placeholder="Login" />
-    <input type="password" placeholder="Password" />
+    <input type="text" placeholder="Вход" />
+    <input type="password" placeholder="Пароль" />
 
-    <button>Enter</button>
+    <button>Вход</button>
   </div>
 </body>
 </html>
-
