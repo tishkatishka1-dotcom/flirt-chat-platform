@@ -14,7 +14,13 @@
     body {
       margin: 0;
       height: 100vh;
-      background: url("999.png") no-repeat center center / cover;
+
+      /* ⬇️ ВОТ ТУТ ФИЗИЧЕСКИ ПОДКЛЮЧЁН PNG */
+      background-image: url("999.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -22,11 +28,12 @@
       color: #e6e6e6;
     }
 
-    /* SVG фон */
+    /* SVG слой */
     .bg {
       position: fixed;
       inset: 0;
       z-index: 0;
+      pointer-events: none;
     }
 
     /* Карточка */
@@ -76,7 +83,7 @@
 
 <body>
 
-  <!-- Волнообразные линии -->
+  <!-- SVG поверх PNG -->
   <svg class="bg" viewBox="0 0 1440 800" preserveAspectRatio="none">
     <defs>
       <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -94,7 +101,7 @@
           fill="none" stroke="url(#g)" stroke-width="2" opacity="0.35"/>
   </svg>
 
-  <!-- Карточка -->
+  <!-- Вход / дальше будет чат -->
   <div class="login-card">
     <h1>Приватный чат</h1>
     <input type="text" placeholder="Вход">
