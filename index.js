@@ -9,6 +9,9 @@ const users = {
 };
 
 const sessions = {}; // token -> user
+// --- chat in-memory ---
+const messages = []; 
+// { from: 'client' | 'operator', text: string, ts: number }
 
 const PORT = process.env.PORT || 3000;
 app.get('/api/health', (req, res) => {
