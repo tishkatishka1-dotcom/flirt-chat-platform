@@ -20,6 +20,40 @@ app.get('/api/health', (req, res) => {
 app.post('/api/register', (req, res) => {
   res.json({ status: 'registered' });
 });
+// --- chat api ---
+app.post('/api/chat/send', (req, res) => {
+  const token = req.headers.authorization;
+  const user = sessions[token];
+
+  if (!user) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  const { text } = req.body;
+  if (!text) {
+    return res.status(400).json({ error: 'empty_message' });
+  }
+
+  messages.push({
+    from: user.role,
+    text,
+    ts: Date.now(),
+  });
+
+  res.json({ status: 'sent' });
+});
+
+app.get('/api/chat/messages', (req, res) => {
+  const token = req.headers.authorization;
+  const user = sessions[token];
+
+  if (!user) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  res.json(messages);
+});
+
 // --- auth (GET for browser test) ---
 app.get('/api/login', (req, res) => {
   const { login, password } = req.query;
