@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Private Chat</title>
+  <title>Приватный чат</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -11,43 +11,28 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
       margin: 0;
-      height: 100vh;
+    }
 
-      /* === ТВОЯ КАРТИНКА, ВШИТА В КОД === */
-      background-image: url("data:image/png;base64,
-iVBORw0KGgoAAAANSUhEUgAAAgAAAAEACAIAAAB7GkOtAAAgAElEQVR4nOy9
-...BASE64 ОБРЕЗАН В ЧАТЕ...
-");
-      background-repeat: no-repeat;
-      background-position: center;
+    body {
+      background: url("999.png") no-repeat center center fixed;
       background-size: cover;
-
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #e6e6e6;
+      color: #ffffff;
     }
-
-    /* SVG фон (ОТКЛЮЧЕН, НО СОХРАНЁН)
-    .bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-    }
-    */
 
     .login-card {
-      position: relative;
-      z-index: 1;
       width: 340px;
       padding: 32px;
       border-radius: 16px;
-      background: rgba(10, 12, 28, 0.92);
-      border: 1px solid transparent;
-      border-image: linear-gradient(135deg, #4b6cff, #9a6bff) 1;
+      background: rgba(10, 12, 28, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
     }
 
     .login-card h1 {
@@ -83,13 +68,6 @@ iVBORw0KGgoAAAANSUhEUgAAAgAAAAEACAIAAAB7GkOtAAAgAElEQVR4nOy9
 </head>
 
 <body>
-
-  <!-- SVG фон сохранён, но выключен -->
-  <!--
-  <svg class="bg" viewBox="0 0 1440 800" preserveAspectRatio="none">
-    ...
-  </svg>
-  -->
 
   <div class="login-card">
     <h1>Приватный чат</h1>
