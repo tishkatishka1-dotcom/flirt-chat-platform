@@ -16,7 +16,8 @@ const messages = [];
 // { from: 'client' | 'operator', text: string, ts: number }
 
 // --- paywall logic ---
-const FREE_MESSAGES_LIMIT = 2;
+const FREE_MESSAGES_LIMIT = process.env.FREE_MESSAGES_LIMIT || 2;
+
 const messageCounters = {}; // userId -> count
 
 const PORT = process.env.PORT || 3000;
