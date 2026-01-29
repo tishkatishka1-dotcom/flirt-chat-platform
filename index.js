@@ -17,6 +17,28 @@ app.get('/api/health', (req, res) => {
 app.post('/api/register', (req, res) => {
   res.json({ status: 'registered' });
 });
+// --- auth ---
+app.post('/api/login', (req, res) => {
+  const { login, password } = req.body;
+  const user = users[login];
+
+  if (!user || user.password !== password) {
+    return res.status(401).json({ error: 'invalid_credentials' });
+  }
+
+  const token = Math.random().toString(36).slice(2);
+  sessions[token] = user;
+
+  res.json({ token, role: user.role });
+});
+
+app.post('/api/logout', (req, res) => {
+  const token = req.headers.authorization;
+  if (token) {
+    delete sessions[token];
+  }
+  res.json({ status: 'logged_out' });
+});
 
 app.get('/', (req, res) => {
   res.send('Flirt chat platform is running 🚀');
