@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express(); 
+const app = express();
 app.use(express.json());
+
 // --- in-memory users & sessions ---
 const users = {
   client: { id: 1, role: 'client', password: 'client' },
@@ -9,55 +10,25 @@ const users = {
 };
 
 const sessions = {}; // token -> user
+
 // --- chat in-memory ---
 const messages = []; 
-// --- paywall logic ---
-const FREE_MESSAGES_LIMIT = 2;
-const messageCounters = {}; 
-// userId -> count
-
 // { from: 'client' | 'operator', text: string, ts: number }
 
+// --- paywall logic ---
+const FREE_MESSAGES_LIMIT = 2;
+const messageCounters = {}; // userId -> count
+
 const PORT = process.env.PORT || 3000;
+
+// --- health ---
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
+
+// --- register stub ---
 app.post('/api/register', (req, res) => {
   res.json({ status: 'registered' });
-});
-// --- chat api ---
-app.post('/api/chat/send', (req, res) => {
-  const token = req.headers.authorization;
-  const user = sessions[token];
-
-  if (!user) {
-    return res.status(401).json({ error: 'unauthorized' });
-  }
-
-  const { text } = req.body;
-  if (!text) {
-    return res.status(400).json({ error: 'empty_message' });
-  }
-
-  messages.push({
-    from: user.role,
-    text,
-    ts: Date.now(),
-  });
-
-  res.json({ status: 'sent' });
-});
-
-app.get('/api/chat/messages', (req, res) => {
-  const token = req.headers.authorization || req.query.token;
-  const user = sessions[token];
-
-
-  if (!user) {
-    return res.status(401).json({ error: 'unauthorized' });
-  }
-
-  res.json(messages);
 });
 
 // --- auth (GET for browser test) ---
@@ -75,7 +46,7 @@ app.get('/api/login', (req, res) => {
   res.json({ token, role: user.role });
 });
 
-// --- auth ---
+// --- auth (POST, normal) ---
 app.post('/api/login', (req, res) => {
   const { login, password } = req.body;
   const user = users[login];
@@ -91,13 +62,65 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/logout', (req, res) => {
-  const token = req.headers.authorization;
+  const token = req.headers.authorization || req.query.token;
   if (token) {
     delete sessions[token];
   }
   res.json({ status: 'logged_out' });
 });
 
+// --- chat send ---
+app.post('/api/chat/send', (req, res) => {
+  const token = req.headers.authorization || req.query.token;
+  const user = sessions[token];
+
+  if (!user) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  const { text } = req.body;
+  if (!text) {
+    return res.status(400).json({ error: 'empty_message' });
+  }
+
+  const uid = user.id;
+  messageCounters[uid] = messageCounters[uid] || 0;
+
+  if (user.role === 'client' && messageCounters[uid] >= FREE_MESSAGES_LIMIT) {
+    return res.json({
+      status: 'paywall',
+      message: 'payment_required'
+    });
+  }
+
+  messageCounters[uid]++;
+
+  messages.push({
+    from: user.role,
+    text,
+    ts: Date.now(),
+  });
+
+  res.json({
+    status: 'sent',
+    count: messageCounters[uid],
+    limit: FREE_MESSAGES_LIMIT
+  });
+});
+
+// --- chat messages ---
+app.get('/api/chat/messages', (req, res) => {
+  const token = req.headers.authorization || req.query.token;
+  const user = sessions[token];
+
+  if (!user) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  res.json(messages);
+});
+
+// --- root ---
 app.get('/', (req, res) => {
   res.send('Flirt chat platform is running 🚀');
 });
@@ -105,5 +128,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
-
-
