@@ -11,6 +11,11 @@ const users = {
 const sessions = {}; // token -> user
 // --- chat in-memory ---
 const messages = []; 
+// --- paywall logic ---
+const FREE_MESSAGES_LIMIT = 2;
+const messageCounters = {}; 
+// userId -> count
+
 // { from: 'client' | 'operator', text: string, ts: number }
 
 const PORT = process.env.PORT || 3000;
