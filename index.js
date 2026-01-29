@@ -1,164 +1,106 @@
-const express = require('express');
-const app = express();
-app.use(express.json());app.use(express.static('public'));
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Private Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("999.png") no-repeat center center / cover;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e6e6e6;
+    }
 
-// --- in-memory users & sessions ---
-const users = {
-  client: { id: 1, role: 'client', password: 'client' },
-  operator: { id: 2, role: 'operator', password: 'operator' },
-  admin: { id: 3, role: 'admin', password: 'admin' },
-};
+    /* SVG фон */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
 
-const sessions = {}; // token -> user
+    /* Карточка */
+    .login-card {
+      position: relative;
+      z-index: 1;
+      width: 340px;
+      padding: 32px;
+      border-radius: 16px;
+      background: rgba(10, 12, 28, 0.92);
+      border: 1px solid transparent;
+      border-image: linear-gradient(135deg, #4b6cff, #9a6bff) 1;
+      backdrop-filter: blur(6px);
+    }
 
-// --- chat in-memory ---
-const messages = []; 
-// { from: 'client' | 'operator', text: string, ts: number }
+    .login-card h1 {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 500;
+    }
 
-// --- paywall logic ---
-const FREE_MESSAGES_LIMIT = process.env.FREE_MESSAGES_LIMIT || 2;
+    .login-card input {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 14px;
+      border-radius: 9px;
+      border: 1px solid #2d3366;
+      background: #0f1228;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
 
-const messageCounters = {}; // userId -> count
+    .login-card button {
+      width: 100%;
+      padding: 13px;
+      border-radius: 9px;
+      border: none;
+      background: linear-gradient(135deg, #4b6cff, #9a6bff);
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
 
-const PORT = process.env.PORT || 3000;
+<body>
 
-// --- health ---
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
-// --- chat send (GET for browser test) ---
-app.get('/api/chat/send', (req, res) => {
-  const token = req.headers.authorization || req.query.token;
-  const user = sessions[token];
+  <!-- Волнообразные линии -->
+  <svg class="bg" viewBox="0 0 1440 800" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#4b6cff" stop-opacity="0.35"/>
+        <stop offset="50%" stop-color="#7b5bff" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#b15cff" stop-opacity="0.35"/>
+      </linearGradient>
+    </defs>
 
-  if (!user) {
-    return res.status(401).json({ error: 'unauthorized' });
-  }
+    <path d="M0 300 C200 200 400 400 600 320 800 250 1000 360 1200 300 1360 260 1440 320"
+          fill="none" stroke="url(#g)" stroke-width="2"/>
+    <path d="M0 360 C220 280 420 440 640 360 860 300 1080 420 1280 360 1400 320 1440 360"
+          fill="none" stroke="url(#g)" stroke-width="2" opacity="0.5"/>
+    <path d="M0 420 C240 360 460 500 680 420 900 360 1120 500 1320 420 1420 380 1440 420"
+          fill="none" stroke="url(#g)" stroke-width="2" opacity="0.35"/>
+  </svg>
 
-  const text = req.query.text;
-  if (!text) {
-    return res.status(400).json({ error: 'empty_message' });
-  }
+  <!-- Карточка -->
+  <div class="login-card">
+    <h1>Приватный чат</h1>
+    <input type="text" placeholder="Вход">
+    <input type="password" placeholder="Пароль">
+    <button>Вход</button>
+  </div>
 
-  const uid = user.id;
-  messageCounters[uid] = messageCounters[uid] || 0;
-
-  if (user.role === 'client' && messageCounters[uid] >= FREE_MESSAGES_LIMIT) {
-    return res.json({ status: 'paywall', message: 'payment_required' });
-  }
-
-  messageCounters[uid]++;
-
-  messages.push({
-    from: user.role,
-    text,
-    ts: Date.now(),
-  });
-
-  res.json({ status: 'sent', count: messageCounters[uid] });
-});
-
-// --- register stub ---
-app.post('/api/register', (req, res) => {
-  res.json({ status: 'registered' });
-});
-
-// --- auth (GET for browser test) ---
-app.get('/api/login', (req, res) => {
-  const { login, password } = req.query;
-  const user = users[login];
-
-  if (!user || user.password !== password) {
-    return res.status(401).json({ error: 'invalid_credentials' });
-  }
-
-  const token = Math.random().toString(36).slice(2);
-  sessions[token] = user;
-
-  res.json({ token, role: user.role });
-});
-
-// --- auth (POST, normal) ---
-app.post('/api/login', (req, res) => {
-  const { login, password } = req.body;
-  const user = users[login];
-
-  if (!user || user.password !== password) {
-    return res.status(401).json({ error: 'invalid_credentials' });
-  }
-
-  const token = Math.random().toString(36).slice(2);
-  sessions[token] = user;
-
-  res.json({ token, role: user.role });
-});
-
-app.post('/api/logout', (req, res) => {
-  const token = req.headers.authorization || req.query.token;
-  if (token) {
-    delete sessions[token];
-  }
-  res.json({ status: 'logged_out' });
-});
-
-// --- chat send ---
-app.post('/api/chat/send', (req, res) => {
-  const token = req.headers.authorization || req.query.token;
-  const user = sessions[token];
-
-  if (!user) {
-    return res.status(401).json({ error: 'unauthorized' });
-  }
-
-  const { text } = req.body;
-  if (!text) {
-    return res.status(400).json({ error: 'empty_message' });
-  }
-
-  const uid = user.id;
-  messageCounters[uid] = messageCounters[uid] || 0;
-
-  if (user.role === 'client' && messageCounters[uid] >= FREE_MESSAGES_LIMIT) {
-    return res.json({
-      status: 'paywall',
-      message: 'payment_required'
-    });
-  }
-
-  messageCounters[uid]++;
-
-  messages.push({
-    from: user.role,
-    text,
-    ts: Date.now(),
-  });
-
-  res.json({
-    status: 'sent',
-    count: messageCounters[uid],
-    limit: FREE_MESSAGES_LIMIT
-  });
-});
-
-// --- chat messages ---
-app.get('/api/chat/messages', (req, res) => {
-  const token = req.headers.authorization || req.query.token;
-  const user = sessions[token];
-
-  if (!user) {
-    return res.status(401).json({ error: 'unauthorized' });
-  }
-
-  res.json(messages);
-});
-
-// --- root ---
-app.get('/', (req, res) => {
-  res.send('Flirt chat platform is running 🚀');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+</body>
+</html>
