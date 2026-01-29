@@ -44,8 +44,9 @@ app.post('/api/chat/send', (req, res) => {
 });
 
 app.get('/api/chat/messages', (req, res) => {
-  const token = req.headers.authorization;
+  const token = req.headers.authorization || req.query.token;
   const user = sessions[token];
+
 
   if (!user) {
     return res.status(401).json({ error: 'unauthorized' });
