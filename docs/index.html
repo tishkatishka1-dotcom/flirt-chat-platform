@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Private Chat</title>
+  <title>Приватный чат</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -14,30 +14,22 @@
     body {
       margin: 0;
       height: 100vh;
-
-      /* === ТВОЯ КАРТИНКА, ВШИТА В КОД === */
-      background-image: url("data:image/png;base64,
-iVBORw0KGgoAAAANSUhEUgAAAgAAAAEACAIAAAB7GkOtAAAgAElEQVR4nOy9
-...BASE64 ОБРЕЗАН В ЧАТЕ...
-");
-      background-repeat: no-repeat;
-      background-position: center;
+      background: url("999.png") no-repeat center center fixed;
       background-size: cover;
-
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #e6e6e6;
+      color: #ffffff;
     }
 
-    /* SVG фон (ОТКЛЮЧЕН, НО СОХРАНЁН)
-    .bg {
+    /* затемнение поверх фона */
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
+      background: rgba(0, 0, 0, 0.45);
       z-index: 0;
     }
-    */
 
     .login-card {
       position: relative;
@@ -45,9 +37,9 @@ iVBORw0KGgoAAAANSUhEUgAAAgAAAAEACAIAAAB7GkOtAAAgAElEQVR4nOy9
       width: 340px;
       padding: 32px;
       border-radius: 16px;
-      background: rgba(10, 12, 28, 0.92);
-      border: 1px solid transparent;
-      border-image: linear-gradient(135deg, #4b6cff, #9a6bff) 1;
+      background: rgba(15, 18, 40, 0.92);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
     }
 
     .login-card h1 {
@@ -74,7 +66,7 @@ iVBORw0KGgoAAAANSUhEUgAAAgAAAAEACAIAAAB7GkOtAAAgAElEQVR4nOy9
       padding: 13px;
       border-radius: 9px;
       border: none;
-      background: linear-gradient(135deg, #4b6cff, #9a6bff);
+      background: linear-gradient(135deg, #6a6cff, #9a6bff);
       color: #fff;
       font-size: 15px;
       cursor: pointer;
@@ -83,13 +75,6 @@ iVBORw0KGgoAAAANSUhEUgAAAgAAAAEACAIAAAB7GkOtAAAgAElEQVR4nOy9
 </head>
 
 <body>
-
-  <!-- SVG фон сохранён, но выключен -->
-  <!--
-  <svg class="bg" viewBox="0 0 1440 800" preserveAspectRatio="none">
-    ...
-  </svg>
-  -->
 
   <div class="login-card">
     <h1>Приватный чат</h1>
