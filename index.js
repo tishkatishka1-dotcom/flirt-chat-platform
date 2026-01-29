@@ -25,6 +25,37 @@ const PORT = process.env.PORT || 3000;
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
+// --- chat send (GET for browser test) ---
+app.get('/api/chat/send', (req, res) => {
+  const token = req.headers.authorization || req.query.token;
+  const user = sessions[token];
+
+  if (!user) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  const text = req.query.text;
+  if (!text) {
+    return res.status(400).json({ error: 'empty_message' });
+  }
+
+  const uid = user.id;
+  messageCounters[uid] = messageCounters[uid] || 0;
+
+  if (user.role === 'client' && messageCounters[uid] >= FREE_MESSAGES_LIMIT) {
+    return res.json({ status: 'paywall', message: 'payment_required' });
+  }
+
+  messageCounters[uid]++;
+
+  messages.push({
+    from: user.role,
+    text,
+    ts: Date.now(),
+  });
+
+  res.json({ status: 'sent', count: messageCounters[uid] });
+});
 
 // --- register stub ---
 app.post('/api/register', (req, res) => {
