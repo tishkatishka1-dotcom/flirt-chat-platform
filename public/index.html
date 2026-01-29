@@ -11,38 +11,41 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-   body {
-  margin: 0;
-  height: 100vh;
-  background:
-    radial-gradient(1200px 600px at 10% 50%, rgba(90, 110, 255, 0.35), transparent 70%),
-    radial-gradient(1000px 500px at 40% 40%, rgba(150, 90, 255, 0.30), transparent 75%),
-    radial-gradient(900px 450px at 70% 55%, rgba(120, 80, 200, 0.28), transparent 75%),
-    radial-gradient(800px 400px at 90% 45%, rgba(200, 100, 255, 0.22), transparent 75%),
-    linear-gradient(180deg, #03040a, #070816 55%, #03040a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #e6e6e6;
-}
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #060713, #0b0d22, #130b2a);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e6e6e6;
+    }
 
+    /* SVG фон */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
 
+    /* Карточка */
     .login-card {
+      position: relative;
+      z-index: 1;
       width: 340px;
-      padding: 30px;
+      padding: 32px;
       border-radius: 16px;
-      background: rgba(12, 14, 32, 0.94);
+      background: rgba(10, 12, 28, 0.92);
       border: 1px solid transparent;
       border-image: linear-gradient(135deg, #4b6cff, #9a6bff) 1;
-      backdrop-filter: blur(2px);
     }
 
     .login-card h1 {
       margin: 0 0 24px;
-      font-size: 22px;
       text-align: center;
+      font-size: 22px;
       font-weight: 500;
-      letter-spacing: 0.4px;
     }
 
     .login-card input {
@@ -57,10 +60,6 @@
       outline: none;
     }
 
-    .login-card input::placeholder {
-      color: #9aa0d0;
-    }
-
     .login-card button {
       width: 100%;
       padding: 13px;
@@ -71,58 +70,37 @@
       font-size: 15px;
       cursor: pointer;
     }
-  </style>.bg-waves {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.login-card {
-  position: relative;
-  z-index: 1;
-}
-
-
+  </style>
 </head>
 
 <body>
-  <svg class="bg-waves" viewBox="0 0 1440 400" preserveAspectRatio="none">
+
+  <!-- Волнообразные линии -->
+  <svg class="bg" viewBox="0 0 1440 800" preserveAspectRatio="none">
     <defs>
-      <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#3b5cff" stop-opacity="0.6"/>
-        <stop offset="50%" stop-color="#7b5bff" stop-opacity="0.6"/>
-        <stop offset="100%" stop-color="#b15cff" stop-opacity="0.6"/>
+      <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#4b6cff" stop-opacity="0.35"/>
+        <stop offset="50%" stop-color="#7b5bff" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#b15cff" stop-opacity="0.35"/>
       </linearGradient>
     </defs>
 
-    <path d="M0,200 C180,120 360,280 540,220 720,160 900,260 1080,210 1260,160 1440,240 1440,240 L1440,0 L0,0 Z"
-          fill="none" stroke="url(#waveGradient)" stroke-width="2"/>
-    <path d="M0,240 C200,180 380,300 560,250 740,200 920,300 1100,250 1280,200 1440,280 1440,280"
-          fill="none" stroke="url(#waveGradient)" stroke-width="2" opacity="0.5"/>
-    <path d="M0,280 C220,240 400,320 580,290 760,260 940,330 1120,300 1300,270 1440,330 1440,330"
-          fill="none" stroke="url(#waveGradient)" stroke-width="2" opacity="0.35"/>
+    <path d="M0 300 C200 200 400 400 600 320 800 250 1000 360 1200 300 1360 260 1440 320"
+          fill="none" stroke="url(#g)" stroke-width="2"/>
+    <path d="M0 360 C220 280 420 440 640 360 860 300 1080 420 1280 360 1400 320 1440 360"
+          fill="none" stroke="url(#g)" stroke-width="2" opacity="0.5"/>
+    <path d="M0 420 C240 360 460 500 680 420 900 360 1120 500 1320 420 1420 380 1440 420"
+          fill="none" stroke="url(#g)" stroke-width="2" opacity="0.35"/>
   </svg>
 
+  <!-- Карточка -->
   <div class="login-card">
     <h1>Приватный чат</h1>
-
-    <input type="text" placeholder="Вход" />
-    <input type="password" placeholder="Пароль" />
-
+    <input type="text" placeholder="Вход">
+    <input type="password" placeholder="Пароль">
     <button>Вход</button>
   </div>
-</body>
 
-  <div class="login-card">
-    <h1>Приватный чат</h1>
-
-    <input type="text" placeholder="Вход" />
-    <input type="password" placeholder="Пароль" />
-
-    <button>Вход</button>
-  </div>
 </body>
 </html>
+
