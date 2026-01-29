@@ -17,6 +17,21 @@ app.get('/api/health', (req, res) => {
 app.post('/api/register', (req, res) => {
   res.json({ status: 'registered' });
 });
+// --- auth (GET for browser test) ---
+app.get('/api/login', (req, res) => {
+  const { login, password } = req.query;
+  const user = users[login];
+
+  if (!user || user.password !== password) {
+    return res.status(401).json({ error: 'invalid_credentials' });
+  }
+
+  const token = Math.random().toString(36).slice(2);
+  sessions[token] = user;
+
+  res.json({ token, role: user.role });
+});
+
 // --- auth ---
 app.post('/api/login', (req, res) => {
   const { login, password } = req.body;
