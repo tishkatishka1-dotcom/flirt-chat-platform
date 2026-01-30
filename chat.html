@@ -89,7 +89,18 @@
 
 <body>
 
-  <div class="chat-card">
+  <div class="chat-card" style="flex-direction: row;">
+
+  <!-- Левая колонка: чаты -->
+  <div style="width: 25%; border-right: 1px solid #2d3366; padding: 12px;">
+    <b>Чаты</b>
+    <div id="chatList" style="margin-top: 12px; font-size: 14px;">
+      Пока пусто
+    </div>
+  </div>
+
+  <!-- Центр: сообщения -->
+  <div style="width: 50%; display: flex; flex-direction: column;">
     <div class="chat-header">Чат</div>
     <div class="messages" id="messages"></div>
 
@@ -98,6 +109,18 @@
       <button id="sendBtn">Отправить</button>
     </div>
   </div>
+
+  <!-- Правая колонка: анкеты -->
+  <div style="width: 25%; border-left: 1px solid #2d3366; padding: 12px;">
+    <b>Анкеты</b>
+    <div id="profileList" style="margin-top: 12px; font-size: 14px;">
+      Пока пусто
+    </div>
+  </div>
+
+
+
+
 
   <script>
     const token = localStorage.getItem('token');
