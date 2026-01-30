@@ -22,52 +22,60 @@
         #140d2b 70%,
         #05030f 100%
       );
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: #e6e6e6;
     }
 
-    .chat-card {border-radius: 16px;
-overflow: hidden;
-
-      width: 100%;
-      height: 100%;
+    /* MAIN WRAPPER */
+    .chat-layout {
       display: flex;
-      flex-direction: row;
+      height: 100%;
+      gap: 0;
+    }
+
+    /* COMMON PANEL STYLE */
+    .panel {
       background: rgba(10, 12, 28, 0.92);
       border: 1px solid transparent;
       border-image: linear-gradient(135deg, #4b6cff, #9a6bff) 1;
-    }
-
-    .column {
-      padding: 12px;
-      overflow-y: auto;
-    }
-
-    .left {
-      width: 25%;
-      border-right: 1px solid #2d3366;
-    }
-
-    .center {
-      width: 50%;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
-    .right {
+    /* LEFT PANEL */
+    .panel-left {
       width: 25%;
-      border-left: 1px solid #2d3366;
+      border-radius: 16px 0 0 16px;
     }
 
-    .chat-header {
+    /* CENTER PANEL */
+    .panel-center {
+      width: 50%;
+      border-radius: 16px;
+      margin: 0 -1px;
+    }
+
+    /* RIGHT PANEL */
+    .panel-right {
+      width: 25%;
+      border-radius: 0 16px 16px 0;
+    }
+
+    .panel-header {
       padding: 16px;
-      text-align: center;
+      font-weight: 600;
       border-bottom: 1px solid #2d3366;
-      font-weight: 500;
+      text-align: center;
     }
 
+    .panel-content {
+      padding: 12px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    /* CHAT CENTER */
     .messages {
       flex: 1;
       padding: 16px;
@@ -112,19 +120,19 @@ overflow: hidden;
 
 <body>
 
-  <div class="chat-card">
+  <div class="chat-layout">
 
-    <!-- Chats -->
-    <div class="column left">
-      <b>Chats</b>
-      <div id="chatList" style="margin-top:12px;font-size:14px;">
+    <!-- CHATS -->
+    <div class="panel panel-left">
+      <div class="panel-header">Chats</div>
+      <div class="panel-content" id="chatList">
         Empty
       </div>
     </div>
 
-    <!-- Chat -->
-    <div class="column center">
-      <div class="chat-header">Chat</div>
+    <!-- CHAT -->
+    <div class="panel panel-center">
+      <div class="panel-header">Chat</div>
       <div class="messages" id="messages"></div>
 
       <div class="chat-input">
@@ -133,10 +141,10 @@ overflow: hidden;
       </div>
     </div>
 
-    <!-- Profiles -->
-    <div class="column right">
-      <b>Profiles</b>
-      <div id="profileList" style="margin-top:12px;font-size:14px;">
+    <!-- PROFILES -->
+    <div class="panel panel-right">
+      <div class="panel-header">Profiles</div>
+      <div class="panel-content" id="profileList">
         Empty
       </div>
     </div>
