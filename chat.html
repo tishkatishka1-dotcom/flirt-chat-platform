@@ -78,11 +78,13 @@
       fill: none;
     }
 
-    .icon-btn:hover {
+    .icon-btn:hover,
+    .balance-btn:hover {
       box-shadow: 0 0 14px rgba(120,140,255,0.8);
     }
 
-    .icon-btn:hover::after {
+    .icon-btn:hover::after,
+    .balance-btn:hover::after {
       content: attr(data-title);
       position: absolute;
       bottom: -28px;
@@ -93,17 +95,25 @@
       white-space: nowrap;
     }
 
-    .start-balance {
-      padding: 10px 26px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #4b6cff, #9a6bff);
+    /* CENTER BALANCE BUTTON */
+    .balance-btn {
+      position: relative;
+      width: 50%;
+      margin: 0 auto 0.2cm auto;
+      padding: 14px 0;
+      text-align: center;
+      border-radius: 22px;
+      border: 1.3px solid rgba(150,120,255,0.9);
+      background: rgba(10, 12, 28, 0.92);
+      cursor: pointer;
       font-weight: bold;
+      transition: all 0.25s ease;
     }
 
     .main-area {
       display: flex;
       gap: 0.2cm;
-      height: calc(100vh - 0.5cm - 80px);
+      height: calc(100vh - 0.5cm - 120px);
     }
 
     .panel {
@@ -169,7 +179,6 @@
 
     <div class="top-left">
       <div class="icon-group">
-
         <div class="icon-btn" data-title="Main menu">
           <svg viewBox="0 0 24 24">
             <line x1="4" y1="6" x2="20" y2="6"/>
@@ -190,11 +199,8 @@
             <polyline points="3,7 12,13 21,7"/>
           </svg>
         </div>
-
       </div>
     </div>
-
-    <div class="start-balance">Start Balance</div>
 
     <div class="top-right">
       <div class="icon-group">
@@ -216,7 +222,6 @@
           </svg>
         </div>
 
-        <!-- 🔥 FAST MODE / SMART TOOLS (REPLACED POWER) -->
         <div class="icon-btn" data-title="Fast Mode / Smart Tools">
           <svg viewBox="0 0 24 24">
             <polygon points="13 2 3 14 11 14 9 22 21 10 13 10"/>
@@ -243,6 +248,11 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- CENTER BALANCE BUTTON -->
+  <div class="balance-btn" data-title="Check balance">
+    Balance
   </div>
 
   <div class="main-area">
