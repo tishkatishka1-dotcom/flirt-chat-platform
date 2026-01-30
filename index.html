@@ -80,5 +80,39 @@
     <input type="password" placeholder="Пароль">
     <button>Вход</button>
   </div>
+
+  <script>
+    const formButton = document.querySelector('button');
+    const inputs = document.querySelectorAll('input');
+
+    formButton.addEventListener('click', async () => {
+      const login = inputs[0].value;
+      const password = inputs[1].value;
+
+      try {
+        const response = await fetch('https://flirt-chat-platform.onrender.com/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ login, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          alert('Неверный логин или пароль');
+          return;
+        }
+
+        localStorage.setItem('token', data.token);
+        alert('Вход успешен. Роль: ' + data.role);
+      } catch (e) {
+        alert('Ошибка соединения с сервером');
+      }
+    });
+  </script>
+
 </body>
 </html>
+
