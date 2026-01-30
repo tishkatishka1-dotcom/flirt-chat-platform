@@ -14,22 +14,20 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #060713, #0b0d22, #130b2a);
-      overflow: hidden;
+      background: url("./999.png") center / cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #e6e6e6;
     }
 
-    /* SVG фон */
-    .bg {
+    .overlay {
       position: fixed;
       inset: 0;
+      background: rgba(6, 7, 19, 0.7);
       z-index: 0;
     }
 
-    /* Карточка */
     .login-card {
       position: relative;
       z-index: 1;
@@ -74,32 +72,13 @@
 </head>
 
 <body>
+  <div class="overlay"></div>
 
-  <!-- Волнообразные линии -->
-  <svg class="bg" viewBox="0 0 1440 800" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#4b6cff" stop-opacity="0.35"/>
-        <stop offset="50%" stop-color="#7b5bff" stop-opacity="0.35"/>
-        <stop offset="100%" stop-color="#b15cff" stop-opacity="0.35"/>
-      </linearGradient>
-    </defs>
-
-    <path d="M0 300 C200 200 400 400 600 320 800 250 1000 360 1200 300 1360 260 1440 320"
-          fill="none" stroke="url(#g)" stroke-width="2"/>
-    <path d="M0 360 C220 280 420 440 640 360 860 300 1080 420 1280 360 1400 320 1440 360"
-          fill="none" stroke="url(#g)" stroke-width="2" opacity="0.5"/>
-    <path d="M0 420 C240 360 460 500 680 420 900 360 1120 500 1320 420 1420 380 1440 420"
-          fill="none" stroke="url(#g)" stroke-width="2" opacity="0.35"/>
-  </svg>
-
-  <!-- Карточка -->
   <div class="login-card">
     <h1>Приватный чат</h1>
     <input type="text" placeholder="Вход">
     <input type="password" placeholder="Пароль">
     <button>Вход</button>
   </div>
-
 </body>
 </html>
