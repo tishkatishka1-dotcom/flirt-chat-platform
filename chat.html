@@ -27,8 +27,6 @@
       flex-direction: column;
     }
 
-    /* ================= TOP BAR ================= */
-
     .top-bar {
       border: 1.3px solid rgba(150,120,255,0.9);
       border-radius: 18px;
@@ -53,8 +51,6 @@
       border-radius: 14px;
       background: rgba(20, 24, 60, 0.6);
     }
-
-    /* ===== PREMIUM ICON BUTTON ===== */
 
     .icon-btn {
       width: 44px;
@@ -104,8 +100,6 @@
       font-weight: bold;
     }
 
-    /* ================= MAIN AREA ================= */
-
     .main-area {
       display: flex;
       gap: 0.2cm;
@@ -141,8 +135,6 @@
     .chat-panel { width: 50%; }
     .profiles-panel { width: 25%; }
 
-    /* ================= CHAT INPUT ================= */
-
     .chat-input {
       display: flex;
       gap: 10px;
@@ -177,13 +169,28 @@
 
     <div class="top-left">
       <div class="icon-group">
+
         <div class="icon-btn" data-title="Menu">
           <svg viewBox="0 0 24 24">
-            <line x1="4" y1="6" x2="20" y2="6"></line>
-            <line x1="4" y1="12" x2="20" y2="12"></line>
-            <line x1="4" y1="18" x2="20" y2="18"></line>
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
           </svg>
         </div>
+
+        <div class="icon-btn" data-title="Chat">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+          </svg>
+        </div>
+
+        <div class="icon-btn" data-title="Mail">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <polyline points="3,7 12,13 21,7"/>
+          </svg>
+        </div>
+
       </div>
     </div>
 
@@ -191,18 +198,54 @@
 
     <div class="top-right">
       <div class="icon-group">
-        <div class="icon-btn" data-title="Info">i</div>
-        <div class="icon-btn" data-title="Language">🌐</div>
-        <div class="icon-btn" data-title="Power">⚡</div>
-        <div class="icon-btn" data-title="Grid">▦</div>
-        <div class="icon-btn" data-title="Logout">⎋</div>
+
+        <div class="icon-btn" data-title="Info">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+        </div>
+
+        <div class="icon-btn" data-title="Language">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15 15 0 0 1 0 20"/>
+            <path d="M12 2a15 15 0 0 0 0 20"/>
+          </svg>
+        </div>
+
+        <div class="icon-btn" data-title="Power">
+          <svg viewBox="0 0 24 24">
+            <line x1="12" y1="2" x2="12" y2="12"/>
+            <path d="M5.5 5.5a9 9 0 1 0 13 0"/>
+          </svg>
+        </div>
+
+        <div class="icon-btn" data-title="Grid">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+
+        <div class="icon-btn" data-title="Logout">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16,17 21,12 16,7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </div>
+
       </div>
     </div>
 
   </div>
 
   <div class="main-area">
-
     <div class="panel chats-panel">
       <div class="panel-header">Chats</div>
       <div class="panel-content">Empty</div>
@@ -210,10 +253,10 @@
 
     <div class="panel chat-panel">
       <div class="panel-header">Chat</div>
-      <div class="panel-content" id="messages"></div>
+      <div class="panel-content"></div>
       <div class="chat-input">
-        <input id="messageInput" type="text" placeholder="Type a message..." />
-        <button id="sendBtn">Send</button>
+        <input type="text" placeholder="Type a message..." />
+        <button>Send</button>
       </div>
     </div>
 
@@ -221,7 +264,6 @@
       <div class="panel-header">Profiles</div>
       <div class="panel-content">Empty</div>
     </div>
-
   </div>
 
 </body>
