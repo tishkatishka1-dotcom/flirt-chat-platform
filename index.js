@@ -1,6 +1,17 @@
 const express = require('express');
 const app = express();
 
+/* ✅ CORS — ЭТО ГЛАВНОЕ */
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 app.use(express.json());
 
 const users = {
@@ -16,20 +27,6 @@ const PORT = process.env.PORT || 3000;
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
-});
-
-app.get('/api/login', (req, res) => {
-  const { login, password } = req.query;
-  const user = users[login];
-
-  if (!user || user.password !== password) {
-    return res.status(401).json({ error: 'invalid_credentials' });
-  }
-
-  const token = Math.random().toString(36).slice(2);
-  sessions[token] = user;
-
-  res.json({ token, role: user.role });
 });
 
 app.post('/api/login', (req, res) => {
