@@ -156,6 +156,49 @@
     .chat-input button {
       padding: 14px 22px;
       border-radius: 12px;
+      /* ===== PREMIUM ICON BUTTON ===== */
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1.3px solid rgba(120,140,255,0.6);
+  background: radial-gradient(
+    circle at top left,
+    rgba(80,120,255,0.35),
+    rgba(20,25,60,0.9)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #ffffff;
+  stroke-width: 1.6;
+  fill: none;
+}
+
+.icon-btn:hover {
+  box-shadow: 0 0 14px rgba(120,140,255,0.8);
+}
+
+.icon-btn:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -28px;
+  background: #1c1f44;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
       border: none;
       background: linear-gradient(135deg, #4b6cff, #9a6bff);
       color: #ffffff;
