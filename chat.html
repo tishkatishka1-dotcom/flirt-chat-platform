@@ -87,9 +87,12 @@
     /* ================= MAIN AREA ================= */
 
     .main-area {
-      flex: 1;
-      display: flex;
-      gap: 0.2cm;
+      .main-area {
+  display: flex;
+  gap: 0.2cm;
+  height: calc(100vh - 0.5cm - 80px); 
+}
+
     }
 
     .panel {
@@ -164,131 +167,133 @@
 </head>
 
 <body>
+<!-- ================= TOP BAR ================= -->
 
-  <!-- ================= TOP BAR ================= -->
+<div class="top-bar">
 
-  <div class="top-bar">
-
-    <div class="top-left">
-      <div class="icon-group">
-        <div class="icon-btn" data-title="Menu">☰</div>
-        <div class="icon-btn" data-title="Chat">💬</div>
-        <div class="icon-btn" data-title="Mail">✉️</div>
-      </div>
+  <!-- LEFT ICON BLOCK -->
+  <div class="top-left">
+    <div class="icon-group">
+      <div class="icon-btn" data-title="Menu">☰</div>
+      <div class="icon-btn" data-title="Chat">💬</div>
+      <div class="icon-btn" data-title="Mail">✉️</div>
     </div>
-
-    <div class="start-balance">Start Balance</div>
-
-    <div class="top-right">
-      <div class="icon-group">
-        <div class="icon-btn" data-title="Info">ℹ️</div>
-        <div class="icon-btn" data-title="Language">🌐</div>
-        <div class="icon-btn" data-title="Power">⚡</div>
-        <div class="icon-btn" data-title="Grid">▦</div>
-        <div class="icon-btn" data-title="Logout">⎋</div>
-      </div>
-    </div>
-
-  </div>
-  <!-- ================= MAIN AREA ================= -->
-
-  <div class="main-area">
-
-    <!-- ===== LEFT: CHATS ===== -->
-    <div class="panel chats-panel">
-      <div class="panel-header">Chats</div>
-      <div class="panel-content">
-        Empty
-      </div>
-    </div>
-
-    <!-- ===== CENTER: CHAT ===== -->
-    <div class="panel chat-panel">
-      <div class="panel-header">Chat</div>
-
-      <div class="panel-content" id="messages">
-        <!-- messages will appear here -->
-      </div>
-
-      <div class="chat-input">
-        <input
-          id="messageInput"
-          type="text"
-          placeholder="Type a message..."
-        />
-        <button id="sendBtn">Send</button>
-      </div>
-    </div>
-
-    <!-- ===== RIGHT: PROFILES ===== -->
-    <div class="panel profiles-panel">
-      <div class="panel-header">Profiles</div>
-      <div class="panel-content">
-        Empty
-      </div>
-    </div>
-
   </div>
 
-  <!-- ================= SCRIPT ================= -->
+  <!-- CENTER -->
+  <div class="start-balance">Start Balance</div>
 
-  <script>
-    const token = localStorage.getItem('token');
+  <!-- RIGHT ICON BLOCK -->
+  <div class="top-right">
+    <div class="icon-group">
+      <div class="icon-btn" data-title="Info">ℹ️</div>
+      <div class="icon-btn" data-title="Language">🌐</div>
+      <div class="icon-btn" data-title="Power">⚡</div>
+      <div class="icon-btn" data-title="Grid">▦</div>
+      <div class="icon-btn" data-title="Logout">⎋</div>
+    </div>
+  </div>
 
-    if (!token) {
-      window.location.href = 'index.html';
-    }
+</div>
 
-    const messagesDiv = document.getElementById('messages');
-    const input = document.getElementById('messageInput');
-    const sendBtn = document.getElementById('sendBtn');
+<!-- ================= MAIN AREA ================= -->
 
-    async function loadMessages() {
-      try {
-        const res = await fetch(
-          'https://flirt-chat-platform.onrender.com/api/chat/messages',
-          { headers: { Authorization: token } }
-        );
+<div class="main-area">
 
-        const data = await res.json();
-        messagesDiv.innerHTML = '';
+  <!-- ===== LEFT: CHATS ===== -->
+  <div class="panel chats-panel">
+    <div class="panel-header">Chats</div>
+    <div class="panel-content">
+      Empty
+    </div>
+  </div>
 
-        data.forEach(m => {
-          const div = document.createElement('div');
-          div.style.marginBottom = '10px';
-          div.innerHTML = `<b>${m.from}:</b> ${m.text}`;
-          messagesDiv.appendChild(div);
-        });
+  <!-- ===== CENTER: CHAT ===== -->
+  <div class="panel chat-panel">
+    <div class="panel-header">Chat</div>
 
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
-      } catch (e) {
-        console.error(e);
-      }
-    }
+    <div class="panel-content" id="messages">
+      <!-- messages will appear here -->
+    </div>
 
-    sendBtn.addEventListener('click', async () => {
-      const text = input.value.trim();
-      if (!text) return;
+    <div class="chat-input">
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="Type a message..."
+      />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
 
-      await fetch(
-        'https://flirt-chat-platform.onrender.com/api/chat/send',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token
-          },
-          body: JSON.stringify({ text })
-        }
+  <!-- ===== RIGHT: PROFILES ===== -->
+  <div class="panel profiles-panel">
+    <div class="panel-header">Profiles</div>
+    <div class="panel-content">
+      Empty
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    window.location.href = 'index.html';
+  }
+
+  const messagesDiv = document.getElementById('messages');
+  const input = document.getElementById('messageInput');
+  const sendBtn = document.getElementById('sendBtn');
+
+  async function loadMessages() {
+    try {
+      const res = await fetch(
+        'https://flirt-chat-platform.onrender.com/api/chat/messages',
+        { headers: { Authorization: token } }
       );
 
-      input.value = '';
-      loadMessages();
-    });
+      const data = await res.json();
+      messagesDiv.innerHTML = '';
 
+      data.forEach(m => {
+        const div = document.createElement('div');
+        div.style.marginBottom = '10px';
+        div.innerHTML = `<b>${m.from}:</b> ${m.text}`;
+        messagesDiv.appendChild(div);
+      });
+
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  sendBtn.addEventListener('click', async () => {
+    const text = input.value.trim();
+    if (!text) return;
+
+    await fetch(
+      'https://flirt-chat-platform.onrender.com/api/chat/send',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token
+        },
+        body: JSON.stringify({ text })
+      }
+    );
+
+    input.value = '';
     loadMessages();
-    setInterval(loadMessages, 3000);
-  </script>
+  });
 
-</body>
-</html>
+  loadMessages();
+  setInterval(loadMessages, 3000);
+</script>
+
+ 
