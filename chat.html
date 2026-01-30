@@ -26,37 +26,28 @@
     }
 
     /* ===== TOP BAR ===== */
-    .top-wrapper {
-      border: 1.3px solid #7f8cff;
-      border-radius: 18px;
-      padding: 10px 14px;
-      margin-bottom: 0.5cm;
+    .top-bar {
+      border: 1.3px solid #6f7cff;
+      border-radius: 20px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(10, 12, 28, 0.85);
+      margin-bottom: 0.5cm;
+      background: rgba(10, 12, 28, 0.9);
     }
 
-    .top-left {
+    .top-left,
+    .top-right {
       display: flex;
       gap: 10px;
-      align-items: center;
-    }
-
-    .mini-box {
-      border: 1.3px solid #7f8cff;
-      border-radius: 14px;
-      padding: 8px;
-      display: flex;
-      gap: 8px;
-      background: rgba(15, 18, 40, 0.9);
     }
 
     .icon-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: #1a1f4d;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #151a3a;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -67,99 +58,100 @@
     .icon-btn:hover::after {
       content: attr(data-title);
       position: absolute;
-      bottom: -30px;
-      background: #11153a;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
       padding: 4px 8px;
       border-radius: 6px;
       font-size: 12px;
       white-space: nowrap;
     }
 
-    .balance {
+    .balance-btn {
       padding: 10px 22px;
-      border-radius: 16px;
-      background: #1a1f4d;
+      border-radius: 18px;
+      background: #1c235a;
+      border: none;
+      color: #fff;
       font-size: 16px;
     }
 
-    .top-right {
-      display: flex;
-      gap: 10px;
-    }
-
     /* ===== MAIN LAYOUT ===== */
-    .layout {
+    .main-layout {
       display: flex;
-      height: calc(100vh - 0.5cm - 0.5cm - 86px);
-      gap: 0;
+      gap: 14px;
+      height: calc(100vh - 0.5cm - 90px);
     }
 
+    /* ===== PANELS ===== */
     .panel {
       background: rgba(10, 12, 28, 0.92);
-      border: 1.3px solid #7f8cff;
-      padding: 16px;
+      border: 1.3px solid #6f7cff;
+      border-radius: 26px;
       display: flex;
       flex-direction: column;
-    }
-
-    /* LEFT PANEL */
-    .left-panel {
-      width: 25%;
-      border-radius: 22px 0 0 22px;
-    }
-
-    /* CENTER PANEL */
-    .center-panel {
-      width: 50%;
-      border-radius: 0 0 0 0;
-      border-left: none;
-      border-right: none;
-    }
-
-    /* RIGHT PANEL */
-    .right-panel {
-      width: 25%;
-      border-radius: 0 22px 22px 0;
+      overflow: hidden;
     }
 
     .panel-header {
+      padding: 16px;
       text-align: center;
-      padding-bottom: 12px;
       border-bottom: 1px solid #2d3366;
-      margin-bottom: 12px;
       font-size: 18px;
     }
 
-    .panel-content {
-      flex: 1;
-      font-size: 14px;
+    /* LEFT */
+    .panel-left {
+      width: 25%;
     }
 
-    /* CHAT INPUT */
+    /* CENTER */
+    .panel-center {
+      width: 50%;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
     .chat-input {
-      margin-top: auto;
+      padding: 14px;
       display: flex;
       gap: 10px;
-      padding-top: 12px;
       border-top: 1px solid #2d3366;
     }
 
     .chat-input input {
       flex: 1;
       padding: 12px;
-      border-radius: 10px;
+      border-radius: 14px;
       border: 1px solid #2d3366;
       background: #0f1228;
       color: #fff;
+      outline: none;
     }
 
     .chat-input button {
       padding: 12px 20px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
       background: linear-gradient(135deg, #4b6cff, #9a6bff);
       color: #fff;
       cursor: pointer;
+    }
+
+    /* RIGHT */
+    .panel-right {
+      width: 25%;
+    }
+
+    .empty {
+      padding: 16px;
+      font-size: 14px;
+      opacity: 0.8;
     }
   </style>
 </head>
@@ -167,62 +159,111 @@
 <body>
 
   <!-- TOP BAR -->
-  <div class="top-wrapper">
-
+  <div class="top-bar">
     <div class="top-left">
-      <div class="mini-box">
-        <div class="icon-btn" data-title="Menu">≡</div>
-        <div class="icon-btn" data-title="Chat">💬</div>
-        <div class="icon-btn" data-title="Mail">✉️</div>
-      </div>
+      <div class="icon-btn" data-title="Menu">☰</div>
+      <div class="icon-btn" data-title="Chat">💬</div>
+      <div class="icon-btn" data-title="Mail">✉️</div>
     </div>
 
-    <div class="balance">Start Balance</div>
+    <button class="balance-btn">Start Balance</button>
 
     <div class="top-right">
       <div class="icon-btn" data-title="Info">ℹ️</div>
       <div class="icon-btn" data-title="Language">🌐</div>
       <div class="icon-btn" data-title="Power">⚡</div>
-      <div class="icon-btn" data-title="Grid">⬛</div>
-      <div class="icon-btn" data-title="Logout">🚪</div>
+      <div class="icon-btn" data-title="Grid">▦</div>
+      <div class="icon-btn" data-title="Logout">⎋</div>
     </div>
-
   </div>
 
-  <!-- MAIN PANELS -->
-  <div class="layout">
+  <!-- MAIN -->
+  <div class="main-layout">
 
-    <div class="panel left-panel">
+    <!-- LEFT PANEL -->
+    <div class="panel panel-left">
       <div class="panel-header">Chats</div>
-      <div class="panel-content">Empty</div>
+      <div class="empty">Empty</div>
     </div>
 
-    <div class="panel center-panel">
+    <!-- CENTER PANEL -->
+    <div class="panel panel-center">
       <div class="panel-header">Chat</div>
-      <div class="panel-content"></div>
+      <div class="messages" id="messages"></div>
 
       <div class="chat-input">
-        <input type="text" placeholder="Type a message..." />
-        <button>Send</button>
+        <input id="messageInput" type="text" placeholder="Type a message..." />
+        <button id="sendBtn">Send</button>
       </div>
     </div>
 
-    <div class="panel right-panel">
+    <!-- RIGHT PANEL -->
+    <div class="panel panel-right">
       <div class="panel-header">Profiles</div>
-      <div class="panel-content">Empty</div>
+      <div class="empty">Empty</div>
     </div>
 
   </div>
   <script>
-    // Auth check
     const token = localStorage.getItem('token');
+
     if (!token) {
       window.location.href = 'index.html';
     }
 
-    // Future logic placeholders (UI only for today)
-    // Chats, profiles, top buttons will be wired later
-    // Tooltips already active via CSS ::after
+    const messagesDiv = document.getElementById('messages');
+    const input = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    async function loadMessages() {
+      try {
+        const res = await fetch(
+          'https://flirt-chat-platform.onrender.com/api/chat/messages',
+          {
+            headers: { Authorization: token }
+          }
+        );
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+        messagesDiv.innerHTML = '';
+
+        data.forEach(m => {
+          const div = document.createElement('div');
+          div.style.marginBottom = '10px';
+          div.innerHTML = `<b>${m.from}:</b> ${m.text}`;
+          messagesDiv.appendChild(div);
+        });
+
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      } catch (e) {
+        console.log('Connection error');
+      }
+    }
+
+    sendBtn.addEventListener('click', async () => {
+      const text = input.value.trim();
+      if (!text) return;
+
+      await fetch(
+        'https://flirt-chat-platform.onrender.com/api/chat/send',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+          },
+          body: JSON.stringify({ text })
+        }
+      );
+
+      input.value = '';
+      loadMessages();
+    });
+
+    loadMessages();
+    setInterval(loadMessages, 3000);
   </script>
 
 </body>
