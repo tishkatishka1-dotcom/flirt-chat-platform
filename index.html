@@ -28,13 +28,12 @@
       z-index: 1;
     }
 
-    /* 🔥 SHARP CORNERS */
     .login-card {
       position: relative;
       z-index: 2;
       width: 360px;
       padding: 28px;
-      border-radius: 0; /* ← острые углы */
+      border-radius: 0;
       background: rgba(15, 18, 40, 0.92);
       border: 1.5px solid rgba(140, 120, 255, 0.8);
       box-shadow: 0 0 40px rgba(120, 100, 255, 0.35);
@@ -64,11 +63,6 @@
       color: rgba(200, 200, 255, 0.65);
     }
 
-    .login-card input:focus {
-      border-color: rgba(170, 150, 255, 0.9);
-      box-shadow: 0 0 10px rgba(140, 120, 255, 0.6);
-    }
-
     .login-card button {
       margin-top: 8px;
       padding: 14px;
@@ -80,8 +74,41 @@
       background: linear-gradient(135deg, #4b6cff, #9a6bff);
     }
 
-    .login-card button:hover {
-      box-shadow: 0 0 14px rgba(140, 120, 255, 0.8);
+    /* ===== MODAL ===== */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal {
+      width: 420px;
+      background: rgba(15, 18, 40, 0.95);
+      border: 1.5px solid rgba(140, 120, 255, 0.9);
+      box-shadow: 0 0 40px rgba(120, 100, 255, 0.45);
+      padding: 26px;
+      text-align: center;
+    }
+
+    .modal h2 {
+      margin: 0 0 12px;
+      color: #ffffff;
+      font-size: 18px;
+    }
+
+    .modal button {
+      margin-top: 16px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #4b6cff, #9a6bff);
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -97,6 +124,16 @@
     <input id="password" type="password" placeholder="Password">
 
     <button id="loginBtn">Sign in</button>
+  </div>
+
+  <!-- MODAL (hidden) -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <h2 id="modalText">Error</h2>
+      <button onclick="document.getElementById('modal').style.display='none'">
+        Close
+      </button>
+    </div>
   </div>
 
   <script>
