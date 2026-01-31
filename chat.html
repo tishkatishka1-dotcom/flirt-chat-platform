@@ -31,11 +31,12 @@
       border: 1.3px solid rgba(150,120,255,0.9);
       border-radius: 18px;
       padding: 12px 16px;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
       margin-bottom: 0.2cm;
       background: rgba(10, 12, 28, 0.92);
+      gap: 12px;
     }
 
     .top-left,
@@ -79,12 +80,12 @@
     }
 
     .icon-btn:hover,
-    .balance-btn:hover {
+    .balance-top-btn:hover {
       box-shadow: 0 0 14px rgba(120,140,255,0.8);
     }
 
     .icon-btn:hover::after,
-    .balance-btn:hover::after {
+    .balance-top-btn:hover::after {
       content: attr(data-title);
       position: absolute;
       bottom: -28px;
@@ -95,18 +96,18 @@
       white-space: nowrap;
     }
 
-    /* CENTER BALANCE BUTTON */
-    .balance-btn {
-      position: relative;
-      width: 50%;
-      margin: 0 auto 0.2cm auto;
+    /* CENTER BALANCE BUTTON IN TOP BAR */
+    .balance-top-btn {
+      justify-self: center;
+      width: 420px;
       padding: 14px 0;
       text-align: center;
       border-radius: 22px;
       border: 1.3px solid rgba(150,120,255,0.9);
       background: rgba(10, 12, 28, 0.92);
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
+      position: relative;
       transition: all 0.25s ease;
     }
 
@@ -202,9 +203,13 @@
       </div>
     </div>
 
+    <!-- CENTER BALANCE BUTTON -->
+    <div class="balance-top-btn" data-title="Check balance">
+      Balance
+    </div>
+
     <div class="top-right">
       <div class="icon-group">
-
         <div class="icon-btn" data-title="Info">
           <svg viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10"/>
@@ -244,15 +249,9 @@
             <line x1="21" y1="12" x2="9" y2="12"/>
           </svg>
         </div>
-
       </div>
     </div>
 
-  </div>
-
-  <!-- CENTER BALANCE BUTTON -->
-  <div class="balance-btn" data-title="Check balance">
-    Balance
   </div>
 
   <div class="main-area">
