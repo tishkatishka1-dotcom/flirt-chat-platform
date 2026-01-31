@@ -19,12 +19,9 @@ body {
     #05030f 100%
   );
   color: #ffffff;
-}
-.page-wrapper {
-  height: 100%;
-  padding: 0.5cm 1cm;
   display: flex;
   flex-direction: column;
+  padding: 0.5cm 1cm;
 }
 
 
