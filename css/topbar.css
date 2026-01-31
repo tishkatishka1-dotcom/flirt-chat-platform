@@ -75,3 +75,18 @@ topbar.css
       font-size: 12px;
       white-space: nowrap;
     }
+ .balance-top-btn {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 420px;
+      padding: 14px 0;
+      text-align: center;
+      border-radius: 22px;
+      border: 1.3px solid rgba(150,120,255,0.9);
+      background: rgba(10, 12, 28, 0.92);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      z-index: 1;
+    }
