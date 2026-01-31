@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="css/topbar.css">
 
   <script src="js/ui.js" defer></script>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: url("999.png") center center / cover no-repeat fixed;
+    }
+  </style>
 </head>
 
 <body>
@@ -60,7 +68,6 @@
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
 
-        alert('Вход успешен. Роль: ' + data.role);
         window.location.href = 'chat.html';
 
       } catch (error) {
