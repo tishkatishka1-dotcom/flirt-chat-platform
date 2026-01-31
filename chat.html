@@ -13,7 +13,7 @@
 
     body {
       margin: 0;
-      padding: 0.5cm 0.6cm 0.5cm; /* ← единая рамка layout */
+      padding: 0.5cm 0.6cm 0.4cm; /* ← финальный нижний отступ */
       height: 100vh;
       background: radial-gradient(
         circle at top left,
@@ -117,7 +117,7 @@
     .main-area {
       display: flex;
       gap: 0.2cm;
-      height: calc(100vh - 0.5cm - 120px); /* логика НЕ тронута */
+      height: calc(100vh - 0.4cm - 120px); /* ← синхронизировано */
     }
 
     .panel {
@@ -127,7 +127,6 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      /* margin-bottom УБРАН — отступ теперь глобальный */
     }
 
     .panel-header {
