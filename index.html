@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -126,13 +126,11 @@
     <button id="loginBtn">Sign in</button>
   </div>
 
-  <!-- MODAL (hidden) -->
+  <!-- MODAL -->
   <div class="modal-backdrop" id="modal">
     <div class="modal">
-      <h2 id="modalText">Error</h2>
-      <button onclick="document.getElementById('modal').style.display='none'">
-        Close
-      </button>
+      <h2 id="modalText"></h2>
+      <button onclick="closeModal()">Close</button>
     </div>
   </div>
 
@@ -140,13 +138,24 @@
     const loginInput = document.getElementById('login');
     const passwordInput = document.getElementById('password');
     const loginBtn = document.getElementById('loginBtn');
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modalText');
+
+    function showModal(text) {
+      modalText.textContent = text;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
 
     loginBtn.addEventListener('click', async () => {
       const login = loginInput.value.trim();
       const password = passwordInput.value.trim();
 
       if (!login || !password) {
-        alert('Please enter login and password');
+        showModal('Please enter login and password');
         return;
       }
 
@@ -165,7 +174,7 @@
         const data = await response.json();
 
         if (!response.ok) {
-          alert('Invalid login or password');
+          showModal('Invalid login or password');
           return;
         }
 
@@ -175,7 +184,7 @@
         window.location.href = 'chat.html';
 
       } catch (error) {
-        alert('Server connection error');
+        showModal('Server connection error');
       }
     });
   </script>
