@@ -49,20 +49,30 @@
       font-size: 22px;
     }
 
+    /* 🔥 FIX: DARK INPUTS LIKE ON THE SCREENSHOT */
     .login-card input {
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(150, 120, 255, 0.5);
-      background: #0f1228;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(140, 120, 255, 0.55);
+      background: rgba(10, 12, 28, 0.95);
       color: #ffffff;
       outline: none;
       font-size: 14px;
     }
 
+    .login-card input::placeholder {
+      color: rgba(200, 200, 255, 0.65);
+    }
+
+    .login-card input:focus {
+      border-color: rgba(170, 150, 255, 0.9);
+      box-shadow: 0 0 10px rgba(140, 120, 255, 0.6);
+    }
+
     .login-card button {
-      margin-top: 6px;
-      padding: 12px;
-      border-radius: 12px;
+      margin-top: 8px;
+      padding: 14px;
+      border-radius: 14px;
       border: none;
       cursor: pointer;
       font-size: 15px;
