@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
-<link rel="stylesheet" href="css/ui.css">
-<link rel="stylesheet" href="css/topbar.css">
-
-<script src="js/ui.js" defer></script>
-
 <head>
   <meta charset="UTF-8" />
   <title>Приватный чат</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
- 
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/topbar.css">
+
+  <script src="js/ui.js" defer></script>
 </head>
 
 <body>
@@ -63,9 +61,7 @@
         localStorage.setItem('role', data.role);
 
         alert('Вход успешен. Роль: ' + data.role);
-
         window.location.href = 'chat.html';
-
 
       } catch (error) {
         alert('Ошибка соединения с сервером');
