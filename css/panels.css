@@ -27,7 +27,8 @@ body {
   .main-area {
       display: flex;
       gap: 0.2cm;
-      height: calc(100vh - 0.5cm - 120px);
+     height: calc(100% - 120px);
+
     }
 
     .panel {
