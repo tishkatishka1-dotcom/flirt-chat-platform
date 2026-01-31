@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Приватный чат</title>
+  <title>Private Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="css/ui.css">
@@ -81,12 +81,12 @@
   <div class="overlay"></div>
 
   <div class="login-card">
-    <h1>Приватный чат</h1>
+    <h1>Private Chat</h1>
 
-    <input id="login" type="text" placeholder="Вход">
-    <input id="password" type="password" placeholder="Пароль">
+    <input id="login" type="text" placeholder="Login">
+    <input id="password" type="password" placeholder="Password">
 
-    <button id="loginBtn">Вход</button>
+    <button id="loginBtn">Sign in</button>
   </div>
 
   <script>
@@ -99,7 +99,7 @@
       const password = passwordInput.value.trim();
 
       if (!login || !password) {
-        alert('Введите логин и пароль');
+        alert('Please enter login and password');
         return;
       }
 
@@ -118,7 +118,7 @@
         const data = await response.json();
 
         if (!response.ok) {
-          alert('Неверный логин или пароль');
+          alert('Invalid login or password');
           return;
         }
 
@@ -128,7 +128,7 @@
         window.location.href = 'chat.html';
 
       } catch (error) {
-        alert('Ошибка соединения с сервером');
+        alert('Server connection error');
       }
     });
   </script>
