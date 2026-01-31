@@ -9,10 +9,11 @@ ui.css
 – поля ввода и кнопка Send
 */
  
-    * {
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+   * {
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
 
   
 
