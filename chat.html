@@ -44,6 +44,7 @@
       display: flex;
       gap: 10px;
       z-index: 2;
+      align-items: center;
     }
 
     .icon-group {
@@ -97,7 +98,6 @@
       white-space: nowrap;
     }
 
-    /* CENTER BALANCE BUTTON — FIXED */
     .balance-top-btn {
       position: absolute;
       left: 50%;
@@ -182,15 +182,18 @@
   <div class="top-bar">
 
     <div class="top-left">
-      <div class="icon-group">
-        <div class="icon-btn" data-title="Main menu">
-          <svg viewBox="0 0 24 24">
-            <line x1="4" y1="6" x2="20" y2="6"/>
-            <line x1="4" y1="12" x2="20" y2="12"/>
-            <line x1="4" y1="18" x2="20" y2="18"/>
-          </svg>
-        </div>
 
+      <!-- 🔥 NEW: MAIN MENU BUTTON -->
+      <div class="icon-btn" data-title="Main menu">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+      </div>
+
+      <!-- EXISTING LEFT ICON GROUP (UNCHANGED) -->
+      <div class="icon-group">
         <div class="icon-btn" data-title="Chat">
           <svg viewBox="0 0 24 24">
             <path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
@@ -203,10 +206,18 @@
             <polyline points="3,7 12,13 21,7"/>
           </svg>
         </div>
+
+        <div class="icon-btn" data-title="Contacts">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="7" r="4"/>
+            <path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>
+          </svg>
+        </div>
       </div>
+
     </div>
 
-    <div class="balance-top-btn" data-title="Check balance">
+    <div class="balance-top-btn">
       Balance
     </div>
 
@@ -229,7 +240,7 @@
           </svg>
         </div>
 
-        <div class="icon-btn" data-title="Fast Mode / Smart Tools">
+        <div class="icon-btn" data-title="Fast Mode">
           <svg viewBox="0 0 24 24">
             <polygon points="13 2 3 14 11 14 9 22 21 10 13 10"/>
           </svg>
