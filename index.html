@@ -15,6 +15,63 @@
       margin: 0;
       min-height: 100vh;
       background: url("999.png") center center / cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1;
+    }
+
+    .login-card {
+      position: relative;
+      z-index: 2;
+      width: 360px;
+      padding: 28px;
+      border-radius: 18px;
+      background: rgba(15, 18, 40, 0.92);
+      border: 1.5px solid rgba(140, 120, 255, 0.8);
+      box-shadow: 0 0 40px rgba(120, 100, 255, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .login-card h1 {
+      margin: 0 0 10px 0;
+      text-align: center;
+      color: #ffffff;
+      font-size: 22px;
+    }
+
+    .login-card input {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(150, 120, 255, 0.5);
+      background: #0f1228;
+      color: #ffffff;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .login-card button {
+      margin-top: 6px;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #4b6cff, #9a6bff);
+    }
+
+    .login-card button:hover {
+      box-shadow: 0 0 14px rgba(140, 120, 255, 0.8);
     }
   </style>
 </head>
